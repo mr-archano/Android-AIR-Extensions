@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<project default="deploy_apk">
+	
+	<!-- SDK properties -->
+   	<property file="build.properties"/>
+	<property name="ADT.JAR" value="${SDK_HOME}/lib/adt.jar"/>
+	
+
+	<!-- Project properties -->
+	<property name="EXTENSION_NAME" value="AndroidExtensions"/>
+	<property name="DESCRIPTOR_NAME" value="extension.xml"/>
+	<property name="PLATFORM_NAME" value="Android-ARM"/>
+	<property name="FLEXLIB_DIR" value="../../${EXTENSION_NAME}"/>
+	<property name="ANDROID_DIR" value="../../${EXTENSION_NAME}_Android"/>
+	<property name="BUILD_DIR" value="out"/>
+	<property name="TMP_DIR" value="tmp"/>
+	
+	<property name="SWC_NAME" value="${EXTENSION_NAME}.swc"/>
+	<property name="JAR_NAME" value="${EXTENSION_NAME}.jar"/>
+	<property name="ANE_NAME" value="${EXTENSION_NAME}.ane"/>
+	<property name="ANDROID_SRC" value="${ANDROID_DIR}/src"/>
+	<property name="ANDROID_RES" value="${ANDROID_DIR}/res"/>
+	<property name="ANDROID_ANE" value="${BUILD_DIR}/${PLATFORM_NAME}"/>
+	<property name="ANDROID_JAR" value="${ANDROID_ANE}/${JAR_NAME}"/>
+	
+	<property name="APP_NAME" value="AndroidExtensions_Demo"/>
+	<property name="APP_DIR" value="../"/>
+	<property name="APP_BUILD" value="${APP_DIR}/build/apk"/>
+	<property name="APK_NAME" value="${APP_NAME}.apk"/>
+	<property name="APP_XML" value="${APP_NAME}-app.xml"/>
+	<property name="APP_SWF" value="${APP_NAME}.swf"/>
+	<property name="EXT_DIR" value="../ane"/>
+	
+	<!-- clean all directories -->
+	<target name="clean">
+		<delete dir="${BUILD_DIR}"/>
+		<delete dir="${APP_BUILD}"/>
+	</target>
+	
+	<!-- init build -->
+	<target name="init" depends="clean">
+		<mkdir dir="${BUILD_DIR}"/>
+		<mkdir dir="${ANDROID_ANE}/"/>
+		<copy 	file="${FLEXLIB_DIR}/src/${DESCRIPTOR_NAME}"
+				tofile="${BUILD_DIR}/${DESCRIPTOR_NAME}"
+				overwrite="yes"/>
+	</target>
+	
+	<!-- access ANE flex library output and deploy swc and swf files into build directory-->
+	<target name="deploy_swc">	
+		<copy file="${FLEXLIB_DIR}/bin/${SWC_NAME}" tofile="${BUILD_DIR}/${SWC_NAME}" overwrite="true"/>
+		<delete dir="${TMP_DIR}" failonerror="false"/>
+		<mkdir dir="${TMP_DIR}"/>
+		<unzip src="${BUILD_DIR}/${SWC_NAME}" dest="${TMP_DIR}"/>
+		<copy file="${TMP_DIR}/library.swf" tofile="${ANDROID_ANE}/library.swf"/>
+		<delete dir="${TMP_DIR}"/>
+	</target>
+	
+	<!-- export ANE java classes -->
+	<target name="deploy_jar">
+		<delete file="${ANDROID_JAR}"/>
+		<jar destfile="${ANDROID_JAR}" basedir="${ANDROID_DIR}/bin">
+			<include name="**/*.class"/>
+		</jar>
+	</target>
+	
+	<!-- build ANE -->
+	<target name="build_ane" depends="deploy_swc,deploy_jar">
+		<java jar="${ADT.JAR}" dir="${BUILD_DIR}" fork="true" failonerror="true">
+			<arg value="-package"/>
+			<arg value="-target"/>
+			<arg value="ane"/>
+			<arg value="${ANE_NAME}"/>
+			<arg value="${DESCRIPTOR_NAME}"/>
+			<arg value="-swc"/>
+			<arg value="${SWC_NAME}"/>
+			<arg value="-platform"/>
+			<arg value="${PLATFORM_NAME}"/>
+			<arg value="-C"/>
+			<arg value="${PLATFORM_NAME}/"/>
+			<arg value="."/>
+		</java>
+		<copy file="${BUILD_DIR}/${ANE_NAME}" tofile="ane/${ANE_NAME}" overwrite="yes"/>
+		<copy file="${BUILD_DIR}/${SWC_NAME}" tofile="ane/${SWC_NAME}" overwrite="yes"/>
+	</target>
+	
+	<target name="build_apk">
+		<delete dir="${APP_BUILD}"/>
+		<mkdir dir="${APP_BUILD}"/>
+		<copy todir="${APP_BUILD}">
+			<fileset dir="${APP_DIR}/bin-debug"/>
+		</copy>
+		<copy file="${APP_DIR}/src/${APP_XML}" todir="${APP_BUILD}" overwrite="yes"/>	
+		<replace file="${APP_BUILD}/${APP_XML}">
+    		<replacefilter token="[This value will be overwritten by Flash Builder in the output app.xml]" value="${APP_SWF}"/>
+    	</replace>
+		<java jar="${ADT.JAR}" dir="${APP_BUILD}" fork="true" failonerror="true">
+			<arg value="-package"/>
+			<arg value="-target"/>
+			<arg value="apk"/>
+			<arg value="-storetype"/>
+			<arg value="PKCS12"/>
+			<arg value="-keystore"/>
+			<arg value="${KEYSTORE}"/>
+			<arg value="-storepass"/>
+			<arg value="${STOREPASS}"/>
+			<arg value="${APK_NAME}"/>
+			<arg value="${APP_XML}"/>
+			<arg value="${APP_SWF}"/>
+			<arg value="icons/"/>
+			<arg value="-extdir"/>
+			<arg value="${EXT_DIR}/"/>
+		</java>
+	</target>
+	
+	<target name="deploy_apk"  depends="build_apk">
+		<exec executable="${ADB}" dir="${APP_BUILD}">
+			<arg value="install"/>
+			<arg value="-r"/>
+			<arg value="${APK_NAME}"/>
+		</exec>
+	</target>
+	
+</project>
