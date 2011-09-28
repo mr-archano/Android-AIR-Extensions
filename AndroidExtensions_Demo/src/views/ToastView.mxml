@@ -8,13 +8,16 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ssd.ane.AndroidExtensions;
+			
 			import spark.events.TextOperationEvent;
 			
 			[Bindable]
 			private var smsLenghtTxt:String = "0/160 (1 SMS)";
 			
-			protected function button1_clickHandler(event:MouseEvent):void{
-				trace("TODO: Text lo9lo9.pò0 to show in a Toast [message:"+message.text+", Short? "+shortToast.selected+"]");
+			protected function shareBtn_clickHandler(event:MouseEvent):void{
+				//trace("TODO: Text to show in a Toast [message:"+message.text+", Short? "+shortToast.selected+"]");
+				AndroidExtensions.toast(message.text, longToast.selected);
 			}
 			
 			protected function message_changeHandler(event:TextOperationEvent):void{
@@ -43,11 +46,11 @@
 	<s:TextArea
 		id="message"
 		width="100%"
-		height="300"
+		height="100"
 		change="message_changeHandler(event)"/>
 	<s:HGroup paddingTop="10" paddingBottom="10">
-		<s:RadioButton id="shortToast" label="Short" groupName="duration" selected="true"/>
-		<s:RadioButton label="Long" groupName="duration" />	
+		<s:RadioButton label="Short" groupName="duration" selected="true"/>
+		<s:RadioButton id="longToast" label="Long" groupName="duration" />	
 	</s:HGroup>
 	
 	<s:Group width="100%">
@@ -56,9 +59,9 @@
 				horizontalAlign="center" />
 		</s:layout>
 		
-		<s:Button 
+		<s:Button id="shareBtn"
 			label="Show Toast"
-			click="button1_clickHandler(event)"
+			click="shareBtn_clickHandler(event)"
 			minWidth="200"/>
 	</s:Group>
 	

@@ -4,8 +4,10 @@
 	
 	<fx:Script>
 		<![CDATA[
-			protected function button1_clickHandler(event:MouseEvent):void{
-				trace("TODO: Share this value [subject: "+subject.text+", message:"+message.text+"]");
+			import com.ssd.ane.AndroidExtensions;
+			protected function shareBtn_clickHandler(event:MouseEvent):void{
+				//trace("TODO: Share this value [subject: "+subject.text+", message:"+message.text+"]");
+				AndroidExtensions.share(subject.text, message.text, "Share:");
 			}
 		]]>
 	</fx:Script>
@@ -46,9 +48,9 @@
 				horizontalAlign="center" />
 		</s:layout>
 		
-		<s:Button 
+		<s:Button id="shareBtn"
 			label="Share"
-			click="button1_clickHandler(event)"
+			click="shareBtn_clickHandler(event)"
 			minWidth="200"/>
 	</s:Group>
 		
