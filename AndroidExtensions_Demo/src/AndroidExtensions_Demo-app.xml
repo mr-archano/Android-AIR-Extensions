@@ -26,6 +26,10 @@
         <visible>true</visible>
         <softKeyboardBehavior>none</softKeyboardBehavior>
     </initialWindow>
+    
+    <extensions>
+    	<extensionID>com.ssd.ane.androidextensions</extensionID>
+    </extensions>
 
 	<icon>
 		<image36x36>icons/ldpi.png</image36x36>
