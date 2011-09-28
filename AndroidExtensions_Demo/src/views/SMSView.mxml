@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="SMS View">
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.events.TextOperationEvent;
+			
+			[Bindable]
+			private var smsLenghtTxt:String = "0/160 (1 SMS)";
+			
+			protected function button1_clickHandler(event:MouseEvent):void{
+				trace("TODO: Send this SMS [message:"+message.text+"]");
+			}
+			
+			protected function message_changeHandler(event:TextOperationEvent):void{
+				var smsL:int = message.text.length;
+				smsLenghtTxt = (smsL % 160)+"/160 ("+(int(smsL/160)+1)+ " SMS)";
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout
+			paddingTop="20"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingBottom="20"/>
+	</s:layout>
+	
+	<s:Label  
+		width="100%" 
+		text="Recipient:"/>
+	
+	<s:TextInput
+		id="recipient"
+		width="100%"/>
+	
+	<s:Label  
+		paddingTop="20"
+		width="100%" 
+		text="SMS text:"/>
+	
+	<s:TextArea
+		id="message"
+		width="100%"
+		height="300"
+		change="message_changeHandler(event)"/>
+	
+	<s:Label 
+		id="smsLenght"
+		text="{smsLenghtTxt}"
+		textAlign="right"
+		fontSize="18"
+		width="100%"/>
+			
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout
+				horizontalAlign="center" />
+		</s:layout>
+		
+		<s:Button 
+			label="Send"
+			click="button1_clickHandler(event)"
+			minWidth="200"/>
+	</s:Group>
+</s:View>

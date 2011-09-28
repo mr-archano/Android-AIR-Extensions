@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:supportClasses="spark.skins.mobile.supportClasses.*"
+		title="Native Extensions">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			protected var extensions:ArrayList = new ArrayList([
+															 	{name:"Share", view:ShareView},
+															   	{name:"SMS", view:SMSView},
+																{name:"Toast", view:ToastView},
+															   ]);
+			
+			
+			
+			protected function extensionsList_changeHandler(event:IndexChangeEvent):void{
+				var i:int = event.newIndex;	
+				navigator.pushView(extensions.getItemAt(i).view);
+				
+				trace("#"+i+" tapped!");
+			}			
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+						
+	</fx:Declarations>
+	
+	<s:navigationContent />
+	
+	<s:List id="extensionsList" 
+			width="100%" height="100%"
+			dataProvider="{extensions}"
+			labelField="name"
+			change="extensionsList_changeHandler(event)">
+			
+	</s:List>
+
+</s:View>

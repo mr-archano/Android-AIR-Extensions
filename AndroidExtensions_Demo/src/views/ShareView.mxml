@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Share View">
+	
+	<fx:Script>
+		<![CDATA[
+			protected function button1_clickHandler(event:MouseEvent):void{
+				trace("TODO: Share this value [subject: "+subject.text+", message:"+message.text+"]");
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout
+			paddingTop="20"
+			paddingLeft="10"
+			paddingRight="10"/>
+	</s:layout>
+		
+	<s:Label  
+			width="100%" 
+			text="Subject:"/>
+		
+		<s:TextInput
+			id="subject"
+			width="100%"/>
+		
+		<s:Label  
+			paddingTop="20"
+			width="100%" 
+			text="Message to Share:"/>
+		
+		
+		<s:TextArea
+			id="message"
+			width="100%"
+			height="300"/>
+			
+	
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout
+				horizontalAlign="center" />
+		</s:layout>
+		
+		<s:Button 
+			label="Share"
+			click="button1_clickHandler(event)"
+			minWidth="200"/>
+	</s:Group>
+		
+		
+</s:View>
