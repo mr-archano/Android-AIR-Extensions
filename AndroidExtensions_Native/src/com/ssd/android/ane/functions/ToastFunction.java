@@ -9,11 +9,13 @@ import com.adobe.fre.FREObject;
 import com.ssd.android.ane.AndroidExtensions;
 
 /**
+ * <p>
  * This function exposes the Android toast facility. In order to use this function
  * you have to provide:
  * 
- * - the text for the toast
- * - the duration type for the toast (long or short)
+ * <li> the text for the toast</li>
+ * <li> the duration type for the toast (long or short)</li>
+ * </p>
  * 
  * @author mr_archano (twitter: @mr_archano)
  *

@@ -10,12 +10,13 @@ import com.adobe.fre.FREObject;
 import com.ssd.android.ane.AndroidExtensions;
 
 /**
+ * <p>
  * This function exposes the Android SMS facility. In order to use this function
  * you have to provide:
  * 
- * - the text for the SMS
- * - the telephone number of the recipient (optional)
- * 
+ * <li> the text for the SMS</li>
+ * <li> the telephone number of the recipient (optional)</li>
+ * </p>
  * @author mr_archano (twitter: @mr_archano)
  *
  */
