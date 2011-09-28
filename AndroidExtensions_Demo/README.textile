@@ -1,3 +1,0 @@
-This project shows AndroidExtenions in action.
-
-*NOTE:* in order to build successfully this project you have to use a Flex SDK with AIR 3.0 SDK
