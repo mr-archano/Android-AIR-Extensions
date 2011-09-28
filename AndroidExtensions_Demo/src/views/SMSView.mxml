@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="SMS View">
+		xmlns:s="library://ns.adobe.com/flex/spark" title="SMS View" xmlns:mx="library://ns.adobe.com/flex/mx">
 	
 	<fx:Script>
 		<![CDATA[
@@ -15,7 +15,7 @@
 			
 			protected function message_changeHandler(event:TextOperationEvent):void{
 				var smsL:int = message.text.length;
-				smsLenghtTxt = (smsL % 160)+"/160 ("+(int(smsL/160)+1)+ " SMS)";
+				smsLenghtTxt = (((smsL-1) % 160)+1)+"/160 ("+(int((smsL-1)/160)+1)+ " SMS)";
 			}
 			
 		]]>
@@ -24,6 +24,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
 	<s:layout>
 		<s:VerticalLayout
 			paddingTop="20"
@@ -38,7 +39,8 @@
 	
 	<s:TextInput
 		id="recipient"
-		width="100%"/>
+		width="100%"
+		restrict="0-9"/>
 	
 	<s:Label  
 		paddingTop="20"
