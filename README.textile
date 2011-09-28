@@ -1,5 +1,8 @@
 This repository contains the projects needed in order to build and use some cool AIR Native Extension written by my own for Android platform.
 
+* *AndroidExtensions:* the Flex Library project containing the ActionScript side of ANE
+
+* *AndroidExtensions_Demo:* a simple Flex Mobile (for Android) project showing AndroidExtensions in action
+
 * *AndroidExtensions_Native:* the Java project containing the native Android code exposed to AIR runtime via ANE facilities
 
-* *AndroidExtensions:* the Flex Library project containing the ActionScript side of ANE
