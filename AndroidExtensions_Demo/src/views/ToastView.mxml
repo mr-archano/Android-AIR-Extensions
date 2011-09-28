@@ -14,7 +14,7 @@
 			private var smsLenghtTxt:String = "0/160 (1 SMS)";
 			
 			protected function button1_clickHandler(event:MouseEvent):void{
-				trace("TODO: Text to show in a Toast [message:"+message.text+", Short? "+shortToast.selected+"]");
+				trace("TODO: Text lo9lo9.pò0 to show in a Toast [message:"+message.text+", Short? "+shortToast.selected+"]");
 			}
 			
 			protected function message_changeHandler(event:TextOperationEvent):void{
@@ -26,7 +26,7 @@
 	</fx:Script>
 	
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<!-- Place non-visual elements (e.g., services, value objects) here !! -->
 	</fx:Declarations>
 	<s:layout>
 		<s:VerticalLayout
