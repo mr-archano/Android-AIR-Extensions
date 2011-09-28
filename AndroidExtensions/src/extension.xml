@@ -1,0 +1,15 @@
+<extension xmlns="http://ns.adobe.com/air/extension/2.5">
+  <id>com.ssd.ane.androidextensions</id>
+  <versionNumber>1</versionNumber>
+  
+  <platforms>
+	<platform name="Android-ARM">
+      <applicationDeployment>
+        <nativeLibrary>AndroidExtensions.jar</nativeLibrary>
+        <initializer>com.ssd.android.ane.AndroidExtensions</initializer>
+        <finalizer>com.ssd.android.ane.AndroidExtensions</finalizer>
+      </applicationDeployment>
+    </platform>
+  </platforms>
+  
+</extension>
