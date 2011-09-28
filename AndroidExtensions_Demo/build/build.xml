@@ -11,7 +11,7 @@
 	<property name="DESCRIPTOR_NAME" value="extension.xml"/>
 	<property name="PLATFORM_NAME" value="Android-ARM"/>
 	<property name="FLEXLIB_DIR" value="../../${EXTENSION_NAME}"/>
-	<property name="ANDROID_DIR" value="../../${EXTENSION_NAME}_Android"/>
+	<property name="ANDROID_DIR" value="../../${EXTENSION_NAME}_Native"/>
 	<property name="BUILD_DIR" value="out"/>
 	<property name="TMP_DIR" value="tmp"/>
 	
@@ -29,7 +29,7 @@
 	<property name="APK_NAME" value="${APP_NAME}.apk"/>
 	<property name="APP_XML" value="${APP_NAME}-app.xml"/>
 	<property name="APP_SWF" value="${APP_NAME}.swf"/>
-	<property name="EXT_DIR" value="../ane"/>
+	<property name="EXT_DIR" value="../../ext"/>
 	
 	<!-- clean all directories -->
 	<target name="clean">
@@ -80,8 +80,8 @@
 			<arg value="${PLATFORM_NAME}/"/>
 			<arg value="."/>
 		</java>
-		<copy file="${BUILD_DIR}/${ANE_NAME}" tofile="ane/${ANE_NAME}" overwrite="yes"/>
-		<copy file="${BUILD_DIR}/${SWC_NAME}" tofile="ane/${SWC_NAME}" overwrite="yes"/>
+		<copy file="${BUILD_DIR}/${ANE_NAME}" tofile="../ext/${ANE_NAME}" overwrite="yes"/>
+		<copy file="${BUILD_DIR}/${SWC_NAME}" tofile="../libs/${SWC_NAME}" overwrite="yes"/>
 	</target>
 	
 	<target name="build_apk">
