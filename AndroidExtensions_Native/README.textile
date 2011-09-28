@@ -2,3 +2,5 @@ In order to build this project successfully, you need to:
 
 # Copy the AIR runtime extensions jar into libs/ (refer to libs/README.txt for details)
 # Make sure the above jar library has been included into project build path
+
+*NOTE:* this project target is Android API 10 (at least 2.3.3)

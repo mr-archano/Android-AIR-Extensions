@@ -1,5 +1,7 @@
 package com.ssd.android.ane;
 
+import android.util.Log;
+
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
 
@@ -8,23 +10,17 @@ public class AndroidExtensions implements FREExtension {
 	
 	@Override
 	public FREContext createContext(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return new AndroidExtensionsContext();
+	}
+	
+	@Override
+	public void initialize() {
+		Log.d(TAG, "Extension initialized.");
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		Log.d(TAG, "Extension disposed.");
 	}
-
-	@Override
-	public void initialize() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
 
 }
