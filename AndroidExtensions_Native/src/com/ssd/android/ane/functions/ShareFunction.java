@@ -9,13 +9,14 @@ import com.adobe.fre.FREObject;
 import com.ssd.android.ane.AndroidExtensions;
 
 /**
- * This function exposes the Android share facilities. In order to use this function
+ * <p>
+ * This function exposes the Android share facility. In order to use this function
  * you have to provide:
  * 
- * - a subject for the stuff you want to share
- * - the text content (text/plain)
- * - the title for the native chooser dialog
- * 
+ * <li> a subject for the stuff you want to share </li>
+ * <li> the text content (text/plain)</li>
+ * <li> the title for the native chooser dialog</li>
+ * </p>
  * @author mr_archano (twitter: @mr_archano)
  *
  */
