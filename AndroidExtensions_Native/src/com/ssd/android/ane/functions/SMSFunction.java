@@ -33,7 +33,7 @@ public class SMSFunction implements FREFunction {
 			String text = args[0].getAsString();
 			String recipient = "";
 			
-			if(args.length == 2) recipient = args[1].getAsString();
+			if(args.length == 2 && args[1] != null) recipient = args[1].getAsString();
 			
 			Intent sendIntent = new Intent(Intent.ACTION_VIEW);       
 			sendIntent.setData(Uri.parse("sms:"+recipient));
