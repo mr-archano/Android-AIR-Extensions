@@ -1,3 +1,11 @@
+Actually you can find three simple-but-useful little extensions, which allow to use Android native facilities for:
+
+* sharing content
+* send SMS
+* show a Toast message
+
+All you have to do in order to see them in action is to grab the "AndroidExtensions_Demo":https://github.com/mr-archano/Android-AIR-Extensions/tree/master/AndroidExtensions_Demo Flex Mobile Project, follow the build instructions provided in "README.textile":https://github.com/mr-archano/Android-AIR-Extensions/blob/master/AndroidExtensions_Demo/README.textile and… enjoy!
+
 This repository contains the projects needed in order to build and use some cool AIR Native Extension written by my own for Android platform.
 
 * *AndroidExtensions:* the Flex Library project containing the ActionScript side of ANE
