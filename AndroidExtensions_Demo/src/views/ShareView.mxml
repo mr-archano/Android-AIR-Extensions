@@ -5,16 +5,19 @@
 	<fx:Script>
 		<![CDATA[
 			import com.ssd.ane.AndroidExtensions;
+			
 			protected function shareBtn_clickHandler(event:MouseEvent):void{
 				//trace("TODO: Share this value [subject: "+subject.text+", message:"+message.text+"]");
 				AndroidExtensions.share(subject.text, message.text, "Share:");
 			}
+			
+			protected function clearBtn_clickHandler(event:MouseEvent):void{
+				subject.text = "";
+				message.text = "";
+			}
 		]]>
 	</fx:Script>
 	
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
 	<s:layout>
 		<s:VerticalLayout
 			paddingTop="20"
@@ -28,7 +31,8 @@
 		
 		<s:TextInput
 			id="subject"
-			width="100%"/>
+			width="100%"
+			text="AIR Native Extension for Android rock!"/>
 		
 		<s:Label  
 			paddingTop="20"
@@ -39,19 +43,25 @@
 		<s:TextArea
 			id="message"
 			width="100%"
-			height="300"/>
+			height="300"
+			text="#AIR3 #NativeExtensions for #Android rock. Check this out: https://github.com/mr-archano/Android-AIR-Extensions"/>
 			
 	
 	<s:Group width="100%">
 		<s:layout>
 			<s:HorizontalLayout
-				horizontalAlign="center" />
+				horizontalAlign="center" gap="20"/>
 		</s:layout>
 		
 		<s:Button id="shareBtn"
 			label="Share"
 			click="shareBtn_clickHandler(event)"
-			minWidth="200"/>
+			minWidth="160"/>
+		
+		<s:Button id="clearBtn"
+				  label="Clear"
+				  click="clearBtn_clickHandler(event)"
+				  minWidth="160"/>
 	</s:Group>
 		
 		

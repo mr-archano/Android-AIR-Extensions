@@ -4,13 +4,16 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ssd.ane.AndroidExtensions;
+			
 			import spark.events.TextOperationEvent;
 			
 			[Bindable]
 			private var smsLenghtTxt:String = "0/160 (1 SMS)";
 			
 			protected function button1_clickHandler(event:MouseEvent):void{
-				trace("TODO: Send this SMS [message:"+message.text+"]");
+				//trace("TODO: Send this SMS [message:"+message.text+"]");
+				AndroidExtensions.sendSMS(message.text, recipient.text);
 			}
 			
 			protected function message_changeHandler(event:TextOperationEvent):void{

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				width="100%" height="90"
+				creationComplete="onCreationCompleteHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			protected var txtCol:uint = 0x202020;
+			protected var upCol:uint = 0xFFFFFF;
+			protected var downCol:uint = 0x999999;
+			protected var bgCol:uint = 0xEEEEEE;
+			
+			protected function onCreationCompleteHandler(event:FlexEvent):void
+			{
+				bg.graphics.beginFill(bgCol, .5);
+				bg.graphics.drawRect(0,0,width,height);
+				bg.graphics.endFill();
+				
+				bg.graphics.lineStyle(3,upCol);
+				bg.graphics.moveTo(0,1);
+				bg.graphics.lineTo(width,1);
+				
+				bg.graphics.lineStyle(1,downCol,.2);
+				bg.graphics.moveTo(0,height-2);
+				bg.graphics.lineTo(width,height-2);
+				
+				bg.graphics.lineStyle(1,downCol,.5);
+				bg.graphics.moveTo(0,height-1);
+				bg.graphics.lineTo(width,height-1);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:UIComponent id="bg" width="100%" height="100%"/>
+	
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"/>
+		</s:layout>
+		<s:Label text="{data.name}" width="100%" color="{txtCol}" paddingLeft="50" fontSize="30" fontWeight="bold"/>
+		<s:Label text=">" color="{txtCol}" paddingRight="50" fontSize="32" fontWeight="bold"/>
+	</s:Group>
+	
+	
+</s:ItemRenderer>
