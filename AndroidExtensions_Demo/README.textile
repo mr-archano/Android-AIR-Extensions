@@ -1,3 +1,15 @@
-This projects shows AndroidExtensions in action.
+This project shows AndroidExtensions in action. I assume you are familiar with Flex Mobile development and with using Flash Builder. Unfortunately the current version of Flash Builder (4.5.1) doesn't provide a integrated build system for native extensions. For this purpose an ANT script has been provided to successfully build and deploy this project on your device.
 
-*NOTE:* In order to build successfully this project you have to use a Flex SDK patched with AIR 3.0 SDK
+*Requirements:*
+* Flash Builder (4.5.1)
+* Flex 4.5.1 SDK patched against AIR 3.0 SDK
+* Android SDK
+
+*How to build:*
+In order to build successfully this project you need to:
+* edit build.properties in build/ folder accordingly to your system/resources
+* make sure the project compiles against AIR 3.0 patched Flex SDK
+* run build.xml ANT script from build/ folder
+
+*NOTE:* build.xml provides different targets. The default one (deploy_apk) is intended to allow you easily build and deploy the final .apk using the extensions binaries provided (lib/AndroidExtensions.swc and ext/AndroidExtensions.ane).
+BTW you can download the companion Android and Flex Library projects, and build extension binaries on your own, running the proper targets defined into ANT build script.
