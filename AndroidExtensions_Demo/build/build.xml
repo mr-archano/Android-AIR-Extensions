@@ -10,6 +10,7 @@
 	<property name="EXTENSION_NAME" value="AndroidExtensions"/>
 	<property name="DESCRIPTOR_NAME" value="extension.xml"/>
 	<property name="PLATFORM_NAME" value="Android-ARM"/>
+	<property name="DEFAULT_NAME" value="default"/>
 	<property name="FLEXLIB_DIR" value="../../${EXTENSION_NAME}"/>
 	<property name="ANDROID_DIR" value="../../${EXTENSION_NAME}_Native"/>
 	<property name="BUILD_DIR" value="out"/>
@@ -22,6 +23,8 @@
 	<property name="ANDROID_RES" value="${ANDROID_DIR}/res"/>
 	<property name="ANDROID_ANE" value="${BUILD_DIR}/${PLATFORM_NAME}"/>
 	<property name="ANDROID_JAR" value="${ANDROID_ANE}/${JAR_NAME}"/>
+	
+	<property name="DEFAULT_ANE" value="${BUILD_DIR}/${DEFAULT_NAME}"/>
 	
 	<property name="APP_NAME" value="AndroidExtensions_Demo"/>
 	<property name="APP_DIR" value="../"/>
@@ -41,6 +44,7 @@
 	<target name="init" depends="clean">
 		<mkdir dir="${BUILD_DIR}"/>
 		<mkdir dir="${ANDROID_ANE}/"/>
+		<mkdir dir="${DEFAULT_ANE}/"/>
 		<copy 	file="${FLEXLIB_DIR}/src/${DESCRIPTOR_NAME}"
 				tofile="${BUILD_DIR}/${DESCRIPTOR_NAME}"
 				overwrite="yes"/>
@@ -53,6 +57,7 @@
 		<mkdir dir="${TMP_DIR}"/>
 		<unzip src="${BUILD_DIR}/${SWC_NAME}" dest="${TMP_DIR}"/>
 		<copy file="${TMP_DIR}/library.swf" tofile="${ANDROID_ANE}/library.swf"/>
+		<copy file="${TMP_DIR}/library.swf" tofile="${DEFAULT_ANE}/library.swf"/>
 		<delete dir="${TMP_DIR}"/>
 	</target>
 	
@@ -79,6 +84,11 @@
 			<arg value="-C"/>
 			<arg value="${PLATFORM_NAME}/"/>
 			<arg value="."/>
+			<arg value="-platform"/>
+			<arg value="${DEFAULT_NAME}"/>
+			<arg value="-C"/>
+			<arg value="${DEFAULT_NAME}/"/>
+			<arg value="."/>
 		</java>
 		<copy file="${BUILD_DIR}/${ANE_NAME}" tofile="../ext/${ANE_NAME}" overwrite="yes"/>
 		<copy file="${BUILD_DIR}/${SWC_NAME}" tofile="../libs/${SWC_NAME}" overwrite="yes"/>
@@ -97,7 +107,7 @@
 		<java jar="${ADT.JAR}" dir="${APP_BUILD}" fork="true" failonerror="true">
 			<arg value="-package"/>
 			<arg value="-target"/>
-			<arg value="apk"/>
+			<arg value="apk-debug"/>
 			<arg value="-storetype"/>
 			<arg value="PKCS12"/>
 			<arg value="-keystore"/>

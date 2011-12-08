@@ -9,7 +9,8 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
 import com.adobe.fre.FREFunction;
 import com.ssd.android.ane.functions.SMSFunction;
-import com.ssd.android.ane.functions.ShareFunction;
+import com.ssd.android.ane.functions.ShareImgFunction;
+import com.ssd.android.ane.functions.ShareTextFunction;
 import com.ssd.android.ane.functions.ToastFunction;
 
 /**
@@ -59,7 +60,8 @@ public class AndroidExtensions implements FREExtension {
 		@Override
 		public Map<String, FREFunction> getFunctions() {
 			Map<String, FREFunction> functions = new HashMap<String, FREFunction>();
-			functions.put("share", new ShareFunction());
+			functions.put("shareText", new ShareTextFunction());
+			functions.put("shareImage", new ShareImgFunction());
 			functions.put("toast", new ToastFunction());
 			functions.put("sendSMS", new SMSFunction());
 			return functions;

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="ShareImageView"
+		actionBarVisible="false"
+		creationComplete="onCreationCompleteHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.ssd.ane.AndroidExtensions;
+			
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			protected var imgPath:String;
+			
+			protected var roll:CameraRoll;
+			protected var loader:Loader;
+			
+			protected function pickBtn_clickHandler(event:MouseEvent):void
+			{
+				if(roll)
+					roll.browseForImage();
+			}
+			
+			protected function shareBtn_clickHandler(event:MouseEvent):void
+			{
+				AndroidExtensions.shareImage(imgPath, "Share:");
+			}
+			
+			protected function onCreationCompleteHandler(event:FlexEvent):void
+			{
+				if(CameraRoll.supportsBrowseForImage && !roll)
+				{
+					roll = new CameraRoll();
+					roll.addEventListener(MediaEvent.SELECT, onSelect);
+				}
+				if(!loader)
+				{
+					loader = new Loader();
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
+				}
+			}
+			
+			protected function onSelect(e:MediaEvent) : void
+			{
+				var data:MediaPromise = e.data;
+				trace("SELECTED: "+data.file.nativePath+" !! "+data.relativePath);
+				imgPath = data.file.nativePath;
+				loader.loadFilePromise(data);
+			}
+			
+			protected function onLoadComplete(e:Event) : void
+			{
+				trace("IMAGE LOADED");
+				img.source = loader.content;
+				shareBtn.enabled = true;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout
+			horizontalAlign="center"
+			paddingTop="20"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingBottom="20"/>
+	</s:layout>
+	
+	<s:BitmapImage id="img" width="100%" height="100%" fillMode="scale" scaleMode="letterbox"/>
+	
+	<s:Group>
+		<s:layout>
+			<s:HorizontalLayout/>
+		</s:layout>
+		<s:Button id="pickBtn" label="Browse" click="pickBtn_clickHandler(event)"/>
+		<s:Button id="shareBtn" label="Share" click="shareBtn_clickHandler(event)" enabled="false"/>
+	</s:Group>
+	
+</s:View>

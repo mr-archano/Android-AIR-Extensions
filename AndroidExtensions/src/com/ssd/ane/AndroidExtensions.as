@@ -3,13 +3,14 @@ package com.ssd.ane
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
+	import flash.system.Capabilities;
 
 	
 	/**
 	 * This class defines a simple AIR Native Extension exposing a set of simple
 	 * and useful Android native facilities:
 	 * 
-	 * <li>sharing</li>
+	 * <li>sharing (image or text)</li>
 	 * <li>SMS sending</li>
 	 * <li>Toast messages</li>
 	 * 
@@ -27,14 +28,12 @@ package com.ssd.ane
 		protected static var _context:ExtensionContext = null;
 		
 		
-		
-		
 		/////////////////////////////////////////
 		// Business functions
 		//
 		
 		/**
-		 * Used to share some content via Android native facility. This function pops up
+		 * Used to share some text/plain content via Android native facility. This function pops up
 		 * a chooser dialog letting the user to select the app to be used for sharing.
 		 * 
 		 * 
@@ -43,10 +42,38 @@ package com.ssd.ane
 		 * @param chooserTitle the title of the chooser dialog shown to the user.
 		 * 
 		 */
-		public static function share(subject:String, text:String, chooserTitle:String) : void
+		public static function shareText(subject:String, text:String, chooserTitle:String) : void
 		{
-			context.call("share", subject, text, chooserTitle);
+			if( isSupported )
+				context.call("shareText", subject, text, chooserTitle);
+			else
+				trace(	"DEBUG: called AndroidExtensions.shareText\n" +
+						"- subject: "+subject+"\n" +
+						"- text: "+text+"\n" +
+						"- chooserTitle: "+chooserTitle+"\n");
 		}
+		
+		
+		
+		/**
+		 * Used to share an image via Android native facility. This function pops up
+		 * a chooser dialog letting the user to select the app to be used for sharing.
+		 * 
+		 * 
+		 * @param imgPath the absolute path of the image to be shared.
+		 * @param chooserTitle the title of the chooser dialog shown to the user.
+		 * 
+		 */
+		public static function shareImage(imgPath:String, chooserTitle:String) : void
+		{
+			if( isSupported )
+				context.call("shareImage", imgPath, chooserTitle);
+			else
+				trace(	"DEBUG: called AndroidExtensions.shareImage\n" +
+					"- imgPath: "+imgPath+"\n" +
+					"- chooserTitle: "+chooserTitle+"\n");
+		}
+		
 		
 		
 		/**
@@ -59,7 +86,12 @@ package com.ssd.ane
 		 */
 		public static function toast(text:String, showForLong:Boolean = false) : void
 		{
-			context.call("toast", text, showForLong);
+			if( isSupported )
+				context.call("toast", text, showForLong);
+			else
+				trace(	"DEBUG: called AndroidExtensions.toast\n" +
+					"- text: "+text+"\n" +
+					"- showForLong: "+showForLong+"\n");
 		}
 		
 		
@@ -74,7 +106,12 @@ package com.ssd.ane
 		 */		
 		public static function sendSMS(text:String, recipient:String=null) : void
 		{
-			context.call("sendSMS", text, recipient);
+			if( isSupported )
+				context.call("sendSMS", text, recipient);
+			else
+				trace(	"DEBUG: called AndroidExtensions.sendSMS\n" +
+					"- text: "+text+"\n" +
+					"- recipient: "+recipient+"\n");
 		}
 		
 		
@@ -123,7 +160,10 @@ package com.ssd.ane
 			return _context;
 		}
 		
-		
+		protected static function get isSupported() : Boolean
+		{
+			return (Capabilities.os.indexOf("Linux") >= 0);
+		}
 		
 		
 		/////////////////////////////////////////
