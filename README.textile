@@ -13,4 +13,3 @@ This repository contains the projects needed in order to build and use some cool
 * *AndroidExtensions_Demo:* a simple Flex Mobile (for Android) project showing AndroidExtensions in action
 
 * *AndroidExtensions_Native:* the Java project containing the native Android code exposed to AIR runtime via ANE facilities
-
